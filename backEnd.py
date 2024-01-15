@@ -1,7 +1,8 @@
 #!/usr/bin/python3
 
-from pytube import YouTube
+import redis
 import re # import the Regular Expressions module to validate a url 
+from pytube import YouTube
 
 def is_valid_url(url):
     url_pattern = re.compile(
@@ -13,4 +14,9 @@ def is_valid_url(url):
         r'(?::\d+)?'  # optional port
         r'(?:/?|[/?]\S+)$', re.IGNORECASE
     )
-    return re.match(url_pattern, url)
+
+    if re.search(r'youtube\.com', url, re.IGNORECASE):
+        return re.match(url_pattern, url)
+
+    return False
+
