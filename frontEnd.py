@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 import tkinter as tk
-from backEnd import is_valid_url
+from backEnd import is_valid_url, store_stream_data
 from tkinter import messagebox
 
 
@@ -35,8 +35,12 @@ def process_url():
     entered_url = url_entry.get()
     # check if the entered value is a valid url
     if is_valid_url(entered_url):
-        messagebox.showinfo("Valid URL!", f"The Entered URL is valid: {entered_url}")
-        video_url = entered_url
+        # Call the function from the backEnd to store stream data to the MongoDB
+        success, message = store_stream_data(entered_url) 
+        if success:
+            messagebox.showinfo("Success", message)
+        else:
+            messagebox.showerror("Error", message)
     else:
         messagebox.showerror("Invalid URL...", "Please enter a valid youtube URL...")
 
