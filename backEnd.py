@@ -4,6 +4,8 @@
 import re # import the Regular Expressions module to validate a url 
 from pytube import YouTube
 
+# This functions validates a proper URL and ALSO checks that it's from youtube.com's servers
+# The function accomplishes this, in a 
 def is_valid_url(url):
     url_pattern = re.compile(
         r'^(?:http|ftp)s?://'  # http:// or https://
@@ -20,4 +22,8 @@ def is_valid_url(url):
 
     return False
 
-#def store_stream_data(youtube_url):
+#def sift_through_streams(url):
+#    yt = YouTube(url)
+#    title = yt.title
+#    audio_streams = yt.streams.filter(only_audio=True, file_extension='webm')
+#    sorted_streams = sorted(audio_streams, key=lambda stream: int(stream.abr[-4]), reverse=True)
